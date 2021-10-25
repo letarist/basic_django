@@ -14,9 +14,10 @@
 <div class="details">
     <div class="links clearfix">
         <ul class="links-menu">
-            <li><a href="{% url 'products:products' %}">Все</a></li>
+            <li><a href="{% url 'products:products' %}"{% if request.resolver_match.url_name == 'products' %}
+                   class="active" {% endif %}>Все</a></li>
             {%for item in category %}
-            <li><a href="{% url 'products:category' item.pk %}" {% if request.resolver_match.url_name == item.url %}
+            <li><a href="{% url 'products:category' item.pk %}" {% if request.resolver_match.kwargs.pk == item.pk %}
                    class="active" {% endif %}> {{item.title}} </a></li>
             {% endfor%}
         </ul>

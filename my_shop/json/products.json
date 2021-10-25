@@ -1,0 +1,51 @@
+[
+  {
+    "category": "офис",
+    "title": "Стул 'Десерт'",
+    "image": "products/office1.jpg",
+    "price": 3499,
+    "quantity": 15
+  },
+  {
+    "category": "офис",
+    "title": "Стул 'CASIOPEA'",
+    "image": "products/office2.jpg",
+    "price": 3700,
+    "quantity": 20
+  },
+  {
+    "category": "дом",
+    "title": "Диван-кровать 'Индиана'",
+    "image": "products/house1.jpg",
+    "price": 52135,
+    "quantity": 5
+  },
+  {
+    "category": "дом",
+    "title": "Диван 'Нексус'",
+    "image": "products/house2.jpg",
+    "price": 12990,
+    "quantity": 10
+  },
+  {
+    "category": "модерн",
+    "title": "Полка 'МОДЕРН СТЛ.322.09'",
+    "image": "products/modern1.jpg",
+    "price": 3490,
+    "quantity": 30
+  },
+  {
+    "category": "модерн",
+    "title": "Письменный стол МОДЕРН-ТЕХНО",
+    "image": "products/modern2.jpg",
+    "price": 9470,
+    "quantity": 15
+  },
+  {
+    "category": "классика",
+    "title": "Полка навесная КЛАССИКА",
+    "image": "products/classic1.jpg",
+    "price": 7919,
+    "quantity": 19
+  }
+]
