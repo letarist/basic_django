@@ -693,20 +693,23 @@ html, body {
 	/*left: 1176px;*/
 	left: 1151px;
 }
+
 .basket {
-	display: block;
-	width: 23px;
-	height: 23px;	
-	background-image: url(/static/img/basket.png);
-	position: absolute;
-	top: 63px;
-	/*left: 1210px;*/
-	left: 1185px;
+    display: block;
+    /* width: 23px; */
+    height: 23px;
+    background-image: url(/static/img/basket.png);
+    position: absolute;
+    top: 63px;
+    /* left: 1210px; */
+    left: 1185px;
     text-decoration: none;
     padding-left: 27px;
     background-repeat: no-repeat;
     color: #0f0f0f;
+    font-size: 12px;
 }
+
 
 .basket span {
 	display: block;

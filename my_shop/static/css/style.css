@@ -577,7 +577,7 @@ html, body {
     width: 28em;
     min-width: 500px;
     margin: 100px auto;
-       
+
     position: relative;
     display: block;
 }
@@ -635,7 +635,7 @@ html, body {
 
 .slider {
 	height: 800px;
-	background-image: url(/static/img/slider.jpg); 
+	background-image: url(/static/img/slider.jpg);
 	/*padding-left: 98px;*/
 	padding-left: 78px;
 	padding-right: 211px;
@@ -686,7 +686,7 @@ html, body {
 .search {
 	display: block;
 	width: 23px;
-	height: 23px;	
+	height: 23px;
 	background-image: url(/static/img/search.png);
 	position: absolute;
 	top: 63px;
@@ -694,18 +694,19 @@ html, body {
 	left: 1151px;
 }
 .basket {
-	display: block;
-	width: 23px;
-	height: 23px;	
-	background-image: url(/static/img/basket.png);
-	position: absolute;
-	top: 63px;
-	/*left: 1210px;*/
-	left: 1185px;
+    display: block;
+    /* width: 23px; */
+    height: 23px;
+    background-image: url(/static/img/basket.png);
+    position: absolute;
+    top: 63px;
+    /* left: 1210px; */
+    left: 1185px;
     text-decoration: none;
     padding-left: 27px;
     background-repeat: no-repeat;
     color: #0f0f0f;
+    font-size: 12px;
 }
 
 .basket span {
@@ -746,7 +747,7 @@ html, body {
 	font-size: 17px;
 	font-weight: 700;
 	line-height: 45px;
-	margin-top: 32px; 
+	margin-top: 32px;
 	letter-spacing: 3px;
 }
 .button-order:hover {
@@ -988,7 +989,7 @@ html, body {
 
 .trending-products {
 	margin-top: 53px;
-	
+
 }
 .trending-products .block a img {
 	float: left;
@@ -1065,7 +1066,7 @@ html, body {
 }
 .exclusive-big {
 	height: 570px;
-	width: 570px;	
+	width: 570px;
 	float: left;
 	background-image: url(/static/img/product-1-lg.jpg);
 }
@@ -1197,7 +1198,7 @@ html, body {
 	margin-right: 0;
 }
 .text-footer h3 {
-	text-transform: uppercase; 
+	text-transform: uppercase;
 	color:  #6c6c6c;
 	font-size: 18px;
 	font-weight: 700;
@@ -1386,8 +1387,8 @@ td:first-child {
 .tab-control li {
 	float: left;
 	border-bottom: 1px solid #6c6c6c;
-	padding-bottom: 19px;	
-} 
+	padding-bottom: 19px;
+}
 .tab-control a {
 	color: #6c6c6c;
 	font-size: 18px;
@@ -1482,7 +1483,7 @@ td:first-child {
 	padding-left: 360px;
 }
 .links-menu {
-	margin:	27px auto 0px;	
+	margin:	27px auto 0px;
 	position: absolute;
 }
 .links-menu li {
@@ -1550,7 +1551,7 @@ td:first-child {
 	background-color: #fff;
     opacity: 0.7;
     position: absolute;
-    top: 0;    
+    top: 0;
 }
 .slider-control a:hover .text {
 	display: block;
