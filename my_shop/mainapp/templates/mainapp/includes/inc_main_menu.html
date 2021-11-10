@@ -7,6 +7,9 @@
     <li><a href="{% url 'contact' %}" {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %}>контакты</a>
     </li>
     <li>
+        {% if user.is_superuser %}
+            <li><a href="{% url 'adminapp:user_list' %}">Админка</a></li>
+        {% endif %}
         {% if user.is_authenticated %}
             <li><a href="{% url 'auth:edit' %}">{{ user.first_name|default:"Пользователь" }}</a></li>
             <li><a href="{% url 'auth:logout' %}">Выйти</a></li>
