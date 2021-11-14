@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from basketapp.models import Basket
 from .models import Product, ProductCategory
 import random
@@ -37,7 +37,7 @@ def contact(request):
     return render(request, 'mainapp/contact.html', context)
 
 
-def products(request, pk=None):
+def products(request, pk=None, page=1):
     category = ProductCategory.objects.all()
     if pk is not None:
         if pk == 0:
@@ -50,10 +50,18 @@ def products(request, pk=None):
         else:
             category_item = get_object_or_404(ProductCategory, pk=pk)
             products_list = Product.objects.filter(category__pk=pk)
+        # page = request.GET.get('p', 1)
+        paginator = Paginator(products_list, 2)
+        try:
+            products_paginator = paginator.page(page)
+        except PageNotAnInteger:
+            products_paginator = paginator.page(1)
+        except EmptyPage:
+            products_paginator = paginator.page(paginator.num_pages)
         context = {
             'title': 'Продукты',
             'category': category,
-            'products': products_list,
+            'products': products_paginator,
             'category_item': category_item,
             'basket': get_basket(request.user)
         }

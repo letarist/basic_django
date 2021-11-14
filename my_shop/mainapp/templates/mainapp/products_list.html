@@ -2,54 +2,64 @@
 {% load static %}
 
 {% block menu %}
-  <div class="hero-white">
-    <div class="header clearfix">
+    <div class="hero-white">
+        <div class="header clearfix">
 
-      {% include 'mainapp/includes/inc_main_menu.html' %}
+            {% include 'mainapp/includes/inc_main_menu.html' %}
 
+        </div>
     </div>
-  </div>
 {% endblock %}
 
 {% block content %}
-  <div class="details">
-    <div class="links clearfix">
-      <ul class="links-menu">
-            <li><a href="{% url 'products:products' %}"{% if request.resolver_match.url_name == 'products' %}
-                   class="active" {% endif %}>Все</a></li>
-            {%for item in category %}
-            <li><a href="{% url 'products:category' item.pk %}" {% if request.resolver_match.kwargs.pk == item.pk %}
-                   class="active" {% endif %}> {{item.title}} </a></li>
-            {% endfor%}
-        </ul>
+    <div class="details">
+        <div class="links clearfix">
+            <ul class="links-menu">
+                <li><a href="{% url 'products:products' %}"{% if request.resolver_match.url_name == 'products' %}
+                       class="active" {% endif %}>Все</a></li>
+                {% for item in category %}
+                    <li><a href="{% url 'products:category' item.pk %}"
+                            {% if request.resolver_match.kwargs.pk == item.pk %}
+                           class="active" {% endif %}> {{ item.title }} </a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="products_list">
+            <div class="title clearfix">
+                <h2>
+                    Категория: "{{ category_item.title|title }}"
+                </h2>
+            </div>
+            <div class="pagination">
+                {% if products.has_previous %}
+                    <a href="{% url 'mainapp:category_pages' category_item.pk products.previous_page_number %} "><<</a>
+                {% endif %}
+                {{ products.number }} / {{ products.paginator.num_pages }}
+                {% if products.has_next %}
+                    <a href="{% url 'mainapp:category_pages' category_item.pk products.next_page_number %} ">>></a>
+                {% endif %}
+            </div>
+            <div class="category-products clearfix">
+
+                {% for product in products %}
+                    <div class="block">
+                        <a href="{% url 'mainapp:product' product.pk %}">
+                            <img src="/media/{{ product.image }}" alt="product">
+                            <div class="text">
+                                <img src="{% static 'img/icon-hover.png' %}" alt="hover">
+                                <h4>{{ product.name }}</h4>
+                                <p>{{ product.description }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
     </div>
 
-    <div class="products_list">
-      <div class="title clearfix">
-        <h2>
-          Категория: "{{ category_item.title|title }}"
-        </h2>
-      </div>
-      <div class="category-products clearfix">
-
-        {% for product in products %}
-          <div class="block">
-            <a href="{% url 'mainapp:product' product.pk %}">
-              <img src="/media/{{ product.image }}" alt="product">
-              <div class="text">
-                <img src="{% static 'img/icon-hover.png' %}" alt="hover">
-                  <h4>{{ product.name }}</h4>
-                  <p>{{ product.description }}</p>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-
-      </div>
-    </div>
-  </div>
-
-  <div class="clr"></div>
+    <div class="clr"></div>
 
 {% endblock %}
 

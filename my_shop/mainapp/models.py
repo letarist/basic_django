@@ -27,6 +27,13 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.title}({self.category.title})'
 
+    def delete(self):
+        if self.is_active:
+            self.is_active = False
+        else:
+            self.is_active = True
+        self.save()
+
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
