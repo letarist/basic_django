@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: account activation
+From: pentegov_92@mail.ru
+To: da@gb.local
+Date: Sat, 20 Nov 2021 13:58:47 -0000
+Message-ID: <163741672734.11868.1763052385858616487@DESKTOP-B71IQAK>
+
+Your activation URL: http://localhost:8000/auth/verify/da@gb.local/ffd8f1/
+-------------------------------------------------------------------------------

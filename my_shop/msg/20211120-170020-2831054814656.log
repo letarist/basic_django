@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: account activation
+From: pentegov_92@mail.ru
+To: fisrst@mail.ru
+Date: Sat, 20 Nov 2021 14:00:20 -0000
+Message-ID: <163741682095.11868.3421593383042540602@DESKTOP-B71IQAK>
+
+Your activation URL: http://localhost:8000/auth/verify/fisrst@mail.ru/870f0c/
+-------------------------------------------------------------------------------
