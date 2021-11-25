@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'authapp',
     'basketapp',
     'mainapp',
+    'orderapp',
 ]
 
 AUTH_USER_MODEL = 'authapp.ShopUser'

@@ -4,9 +4,7 @@
 {% block menu %}
     <div class="hero-white">
         <div class="header clearfix">
-
             {% include 'mainapp/includes/inc_main_menu.html' %}
-
         </div>
     </div>
 {% endblock %}
@@ -27,8 +25,11 @@
 
         <div class="products_list">
             <div class="title clearfix">
-                <h2>
+                <h2>{% if category_item.title %}
                     Категория: "{{ category_item.title|title }}"
+                    {% else %}
+                    Категория: "все"
+                    {% endif %}
                 </h2>
             </div>
             <div class="pagination">
