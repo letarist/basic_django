@@ -9,10 +9,10 @@ urlpatterns = [
     path('products/delete/<int:pk>/', admin_views.ProductDeleteView.as_view(), name='product_delete'),
     path('products/detail/<int:pk>/',admin_views.ProductDetailView.as_view(),name='product_detail'),
 
-    path('categories/create/', admin_views.category_create, name='category_create'),
+    path('categories/create/', admin_views.CreateCategory.as_view(), name='category_create'),
     path('categories/', admin_views.categories, name='category_list'),
-    path('categories/update/<int:pk>/', admin_views.category_update, name='category_edit'),
-    path('categories/delete/<int:pk>/', admin_views.category_delete, name='category_delete'),
+    path('categories/update/<int:pk>/', admin_views.EditCategory.as_view(), name='category_edit'),
+    path('categories/delete/<int:pk>/', admin_views.DeleteCategory.as_view(), name='category_delete'),
 
     path('users/create/', admin_views.user_create, name='user_create'),
     path('users/', admin_views.UsersListView.as_view(), name='user_list'),

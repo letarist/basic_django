@@ -2,8 +2,8 @@
 {% load static %}
 {% load tags %}
 {% block content %}
-  <div class="products_list">
-    <button class="new_product">
+  <div class="row">
+    <button class="btn">
       <a href={% url 'adminapp:product_create' category.pk %}>
         новый продукт
       </a>

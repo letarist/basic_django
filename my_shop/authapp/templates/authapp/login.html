@@ -11,5 +11,7 @@
         <input type="submit" class="btn btn-primary" value="Войти">
     </form>
     <hr>
-    <a href="{% url 'auth:register' %}">Регистрация</a>
+    <a href="{% url 'auth:register' %}" class="btn btn-link">Регистрация</a><br>
+    <a  class="btn btn-link" href="{% url 'social:begin' 'vk-oauth2'%}?next=/">Вход через VK</a><br>
+
 {% endblock %}

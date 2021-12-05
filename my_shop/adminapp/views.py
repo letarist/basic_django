@@ -4,18 +4,10 @@ from django.views.generic import ListView, CreateView, UpdateView, DetailView, D
 from django.utils.decorators import method_decorator
 from django.urls import reverse, reverse_lazy
 # Create your views here.
-from adminapp.forms import ShopUsersAdminEditForm, ProductEditForm
+from adminapp.forms import ShopUsersAdminEditForm, ProductEditForm, CategoryCreateForm
 from authapp.forms import ShopUserRegisterForm
 from authapp.models import ShopUser
 from mainapp.models import ProductCategory, Product
-
-
-# @user_passes_test(lambda u: u.is_superuser)
-# def product_create(request):
-#     context = {
-#
-#     }
-#     return render(request, '', context)
 
 
 class ProductCreateView(CreateView):
@@ -24,14 +16,6 @@ class ProductCreateView(CreateView):
     form_class = ProductEditForm
     success_url = reverse_lazy('adminapp:category_list')
 
-
-# @user_passes_test(lambda u: u.is_superuser)
-# def products(request, pk):
-#     context = {
-#         'category': get_object_or_404(ProductCategory, pk=pk),
-#         'object_list': Product.objects.filter(category__pk=pk).order_by('-is_active')
-#     }
-#     return render(request, 'adminapp/product.html', context)
 
 class ProductsListView(ListView):
     model = Product
@@ -46,13 +30,6 @@ class ProductsListView(ListView):
         return Product.objects.filter(category__pk=self.kwargs.get('pk'))
 
 
-# @user_passes_test(lambda u: u.is_superuser)
-# def product_update(request):
-#     context = {
-#
-#     }
-#     return render(request, '', context)
-
 class ProductUpdateView(UpdateView):
     model = Product
     template_name = 'adminapp/product_form.html'
@@ -61,14 +38,6 @@ class ProductUpdateView(UpdateView):
     def get_success_url(self):
         product_item = Product.objects.get(pk=self.kwargs['pk'])
         return reverse('adminapp:product_list', args=[product_item.category_id])
-
-
-# @user_passes_test(lambda u: u.is_superuser)
-# def product_delete(request):
-#     context = {
-#
-#     }
-#     return render(request, '', context)
 
 
 class ProductDeleteView(DeleteView):
@@ -80,25 +49,16 @@ class ProductDeleteView(DeleteView):
         return reverse('adminapp:product_list', args=[product_item.category_id])
 
 
-# @user_passes_test(lambda u: u.is_superuser)
-# def product_detail(request):
-#     context = {
-#
-#     }
-#     return render(request, '', context)
-
 class ProductDetailView(DeleteView):
     model = Product
     template_name = 'adminapp/product_detail.html'
 
 
-
-@user_passes_test(lambda u: u.is_superuser)
-def category_create(request):
-    context = {
-
-    }
-    return render(request, '', context)
+class CreateCategory(CreateView):
+    model = ProductCategory
+    form_class = CategoryCreateForm
+    success_url = reverse_lazy('adminapp:category_list')
+    template_name = 'adminapp/category_create.html'
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -109,20 +69,33 @@ def categories(request):
     return render(request, 'adminapp/categories.html', context)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def category_update(request):
-    context = {
+# @user_passes_test(lambda u: u.is_superuser)
+# def category_update(request):
+#     context = {
+#
+#     }
+#     return render(request, '', context)
+class EditCategory(UpdateView):
+    model = ProductCategory
+    success_url = reverse_lazy('adminapp:category_list')
+    form_class = CategoryCreateForm
+    template_name = 'adminapp/category_form.html'
 
-    }
-    return render(request, '', context)
 
+# @user_passes_test(lambda u: u.is_superuser)
+# def category_delete(request):
+#     context = {
+#
+#     }
+#     return render(request, '', context)
 
-@user_passes_test(lambda u: u.is_superuser)
-def category_delete(request):
-    context = {
+class DeleteCategory(DeleteView):
+    model = ProductCategory
+    template_name = 'adminapp/category_delete.html'
 
-    }
-    return render(request, '', context)
+    def get_success_url(self):
+        product_item = Product.objects.get(pk=self.kwargs['pk'])
+        return reverse('adminapp:product_list', args=[product_item.category_id])
 
 
 @user_passes_test(lambda u: u.is_superuser)
