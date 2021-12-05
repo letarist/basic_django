@@ -9,4 +9,5 @@ urlpatterns = [
     path('update/<int:pk>/', orderapp.OrderEditView.as_view(), name='order_update'),
     path('delete/<int:pk>/', orderapp.OrderDeleteView.as_view(), name='delete'),
     path('cancel/forming/<int:pk>/', orderapp.order_forming_complete, name='forming_cancel'),
+    path('product/price/<int:pk>/', orderapp.product_price, name='product_price'),
 ]

@@ -55,6 +55,29 @@ window.onload = function () {
         prefix: 'orderitems',
         removed: deleteOrderItem,
     });
+    $('.order_form').on('change', 'select', function () {
+        var target = event.target;
+        orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-quantity', ''));
+        var product_id = target.options[target.selectedIndex].value;
+        if (product_id) {
+            $.ajax({
+                url: '/order/product/price/' + product_id + '/',
+                success: function (data) {
+                    if (data.price) {
+                        price_arr[orderitem_num] = data.price;
+                        if (isNaN(quantity_arr[orderitem_num])) {
+                            quantity_arr[orderitem_num] = 0;
+                        }
+                        var price_string = '<span>' + data.price.toString().replace('.', ',')
+                        '</span>'
+                        var current_tr = $('.order_form table').find('tr:eq('+(orderitem_num+1)+')');
+                        current_tr.find('td:eq(2)').html(price_string);
+
+                    }
+                }
+            })
+        }
+    })
 
     function deleteOrderItem(row) {
         let target_name = row[0].querySelector('input[type=number]').name;
@@ -63,3 +86,4 @@ window.onload = function () {
         order_summary_update(price_arr[orderitem_num], delta_quantity);
     }
 }
+
