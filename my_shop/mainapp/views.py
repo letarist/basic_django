@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from basketapp.models import Basket
 from .models import Product, ProductCategory
@@ -30,8 +31,13 @@ def get_same_products(hot_product):
 
 
 def index(request):
+    is_home = Q(category__title='Дом')
+    is_office = Q(category__title='Офис')
+
     context = {
-        'products': Product.objects.all()[:4],
+        'products': Product.objects.filter(
+            is_home | is_office
+        ),
         'title': 'Главная',
     }
     return render(request, 'mainapp/index.html', context)
@@ -44,7 +50,7 @@ def contact(request):
     return render(request, 'mainapp/contact.html', context)
 
 
-@cache_page(3600)
+# @cache_page(3600)
 def products(request, pk=None, page=1):
     category = ProductCategory.objects.all()
     if pk is not None:
@@ -55,7 +61,7 @@ def products(request, pk=None, page=1):
                 'pk': 0,
             }
         else:
-            category_item = get_category()
+            category_item = get_object_or_404(ProductCategory, pk=pk)
             products_list = Product.objects.filter(category__pk=pk)
         # page = request.GET.get('p', 1)
         paginator = Paginator(products_list, 2)
@@ -69,7 +75,7 @@ def products(request, pk=None, page=1):
             'title': 'Продукты',
             'category': category,
             'products': products_paginator,
-            'category_item': get_category(),
+            'category_item': category_item,
         }
 
         return render(request, 'mainapp/products_list.html', context=context)

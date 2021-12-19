@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
@@ -8,6 +9,26 @@ from adminapp.forms import ShopUsersAdminEditForm, ProductEditForm, CategoryCrea
 from authapp.forms import ShopUserRegisterForm
 from authapp.models import ShopUser
 from mainapp.models import ProductCategory, Product
+from django.dispatch import receiver
+from django.db.models.signals import pre_save
+from django.db import connection
+
+
+def db_profile_by_type(prefix, type, queries):
+    update_queries = list(filter(lambda x: type in x['sql'], queries))
+    print(f'db_profile {type} for {prefix}:')
+    [print(query['sql']) for query in update_queries]
+
+
+@receiver(pre_save, sender=ProductCategory)
+def product_is_active_update_productcategory_save(sender, instance, **kwargs):
+    if instance.pk:
+        if instance.is_active:
+            instance.product_set.update(is_active=True)
+        else:
+            instance.product_set.update(is_active=False)
+
+        db_profile_by_type(sender, 'UPDATE', connection.queries)
 
 
 class ProductCreateView(CreateView):
@@ -81,6 +102,15 @@ class EditCategory(UpdateView):
     form_class = CategoryCreateForm
     template_name = 'adminapp/category_form.html'
 
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data.get('discount')
+            if discount:
+                self.object.product_set.update(
+                    price=F('price') * (1 - discount / 100)
+                )
+        return super().form_valid(form)
+
 
 # @user_passes_test(lambda u: u.is_superuser)
 # def category_delete(request):
@@ -92,10 +122,7 @@ class EditCategory(UpdateView):
 class DeleteCategory(DeleteView):
     model = ProductCategory
     template_name = 'adminapp/category_delete.html'
-
-    def get_success_url(self):
-        product_item = Product.objects.get(pk=self.kwargs['pk'])
-        return reverse('adminapp:product_list', args=[product_item.category_id])
+    success_url = reverse_lazy('adminapp:category_list')
 
 
 @user_passes_test(lambda u: u.is_superuser)
